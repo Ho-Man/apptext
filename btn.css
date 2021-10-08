@@ -1,0 +1,15 @@
+/* Add  */
+.btn-cancel{
+    text-align: right;
+    padding-bottom: 10px;
+  }
+  .btn-func{
+    text-align: center;
+    font-weight: bold;
+  }
+  .btn-func button{
+    width: 90px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
