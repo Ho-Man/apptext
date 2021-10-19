@@ -29,13 +29,13 @@ include_once("connection.php");
     {
 		$_SESSION["us"]="";
         $us=$_GET['username'];
-		$us=htmlspecialchars(postgre_real_escape_string($conn,$us));
+		$us=htmlspecialchars(pg_real_escape_string($conn,$us));
         $pa=$_GET['pass'];
 			include_once("connection.php");
 			$pass=md5($pa);
-			$res=postgre_query($conn,"select * from customer where Username='$us' and Password='$pass'")
-			or die(postgre_error($conn));
-			if(postgre_num_rows($res)==1){
+			$res=pg_query($conn,"select * from customer where Username='$us' and Password='$pass'")
+			or die(pg_error($conn));
+			if(pg_num_rows($res)==1){
                 echo "<script type='text/javascript'>alert('Login Successful');</script>";
 				$_SESSION["us"]= "$us";
                 echo "<script> location.href='index.php' </script>";

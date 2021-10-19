@@ -94,15 +94,15 @@ session_start();
 	include_once('connection.php');
         if(isset($_GET["id"])){
 			$id=$_GET["id"];
-			$result=mysqli_query($conn,"select*from product where ProductID='$id'") or die(mysqli_error($conn)) ;
-			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$result=pg_query($conn,"select*from product where ProductID='$id'") or die(pg_error($conn)) ;
+			$row=pg_fetch_array($result,pg_ASSOC);
 			$proid=$row['ProductID'];
 			$proname=$row['ProductName'];
             $price=$row['Price'];
             $brandid=$row['BrandID'];
             $desc=$row['Description'];
-            $result1=mysqli_query($conn,"select*from brand where BrandID='$brandid'") or die(mysqli_error($conn)) ;
-            $row1=mysqli_fetch_array($result1,MYSQLI_ASSOC);
+            $result1=pg_query($conn,"select*from brand where BrandID='$brandid'") or die(pg_error($conn)) ;
+            $row1=pg_fetch_array($result1,pg_ASSOC);
             $brandname=$row1['BrandName'];
             
       }

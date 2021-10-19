@@ -140,8 +140,8 @@ session_start();
           <?php
             include_once('connection.php');
             $No=1;
-            $result=postgre_query($conn,"Select * from product");
-            while($row=postgre_fetch_array($result,POSTGRE_ASSOC))
+            $result=pg_query($conn,"Select * from product");
+            while($row=pg_fetch_array($result,pg_ASSOC))
             {
             ?>
             <div class="col-lg-3 col-md-6 portfolio-item">
