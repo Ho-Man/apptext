@@ -47,7 +47,7 @@
             if(isset($_GET["orderid"])){
                 $orderid=$_GET["orderid"];
                 $productid=$_GET["productid"];
-                mysqli_query($conn,"delete from orderdetail where OrderID='$orderid'and ProductID='$productid'")or die(mysqli_error($conn));
+                postgre_query($conn,"delete from orderdetail where OrderID='$orderid'and ProductID='$productid'")or die(postgre_error($conn));
             }
         }
         ?>
@@ -135,8 +135,8 @@
           <tbody>
           <?php
             $No=1;
-            $result=mysqli_query($conn,"SELECT * FROM `orderdetail`") or die(mysqli_error($conn));
-            while($row=mysqli_fetch_array($result,MYSQLI_ASSOC))
+            $result=postgre_query($conn,"SELECT * FROM `orderdetail`") or die(postgre_error($conn));
+            while($row=postgre_fetch_array($result,POSTGRE_ASSOC))
             {
             ?>
             <tr>

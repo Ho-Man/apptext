@@ -80,11 +80,11 @@ if(isset($_POST["btn_send"]))
     }
     else{
         $sq="select CustomerID from customer where UserName='$username'";
-        $res=mysqli_query($conn,$sq) or die(mysqli_error($conn));
-        $row=mysqli_fetch_array($res,MYSQLI_ASSOC);
+        $res=postgre_query($conn,$sq) or die(postgre_error($conn));
+        $row=postgre_fetch_array($res,POSTGRE_ASSOC);
         $id=$row['CustomerID'];
-        mysqli_query($conn,"INSERT INTO `feedback`( `CustomerID`, `Subject`, `Content`) VALUES ('$id','$sub','$mes')")
-        or die(mysqli_error($conn));
+        postgre_query($conn,"INSERT INTO `feedback`( `CustomerID`, `Subject`, `Content`) VALUES ('$id','$sub','$mes')")
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('Add Feedback Successful');</script>";
 }
 }

@@ -2,9 +2,9 @@
 $id=isset($_GET['id']) ?$_GET['id']:'';
 include_once("connection.php");
 $query="select * from product where ProductID='$id'";
-$res=mysqli_query($conn,$query);
+$res=postgre_query($conn,$query);
 if($res){
-    $product=mysqli_fetch_assoc($res);
+    $product=postgre_fetch_assoc($res);
 }
 $item=[
     'id'=>$product['ProductID'],

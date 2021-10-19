@@ -45,7 +45,7 @@
         if(isset($_GET["function"])=='del'){
             if(isset($_GET["id"])){
                 $id=$_GET["id"];
-                mysqli_query($conn,"delete from Feedback where FeedbackID='$id'");
+                postgre_query($conn,"delete from Feedback where FeedbackID='$id'");
             }
         }
         ?>
@@ -135,8 +135,8 @@
           <tbody>
           <?php
             $No=1;
-            $result=mysqli_query($conn,"Select * from feedback");
-            while($row=mysqli_fetch_array($result,MYSQLI_ASSOC))
+            $result=postgre_query($conn,"Select * from feedback");
+            while($row=postgre_fetch_array($result,POSTGRE_ASSOC))
             {
             ?>
             <tr>

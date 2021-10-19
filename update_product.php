@@ -36,10 +36,10 @@
     function bind_Category_List($conn,$selectedValue)
     {
         $sqlstring = "select * from brand";
-        $result = mysqli_query($conn, $sqlstring);
+        $result = postgre_query($conn, $sqlstring);
         echo "<select name='BrandList' class='form-control'>
 		<option value='0'>Choose category</option>";
-        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        while ($row = postgre_fetch_array($result, POSTGRE_ASSOC)) {
             if($row['BrandID']==$selectedValue){
                 echo "<option value='" . $row['BrandID'] . "'selected>" . $row['BrandName'] . "</option>";
             }
@@ -81,14 +81,14 @@
             if ($pic['type'] == "image/jpg" || $pic['type'] == "image/jpeg" || $pic['type'] == "image/png" || $pic['type'] == "image/gif") {
                 if ($pic['size'] < 614400) {
                     $sq = "select * from product where ProductID!='$proid' and ProductName='$proname'";
-                    $result = mysqli_query($conn, $sq);
-                    if (mysqli_num_rows($result) == 0) {
+                    $result = postgre_query($conn, $sq);
+                    if (postgre_num_rows($result) == 0) {
                         copy($pic['tmp_name'], "product-imgs/" . $pic['name']);
                         $filePic = $pic['name'];
                         $sqlstring = "UPDATE `product` SET
                         `ProductName`='$proname',`Price`='$price',`Img`='$filePic',`Stock`='$stock',
                         `Description`='$description',`BrandID`='$brand'WHERE ProductID='$proid'";
-                        mysqli_query($conn, $sqlstring) or die(mysqli_error($conn));
+                        postgre_query($conn, $sqlstring) or die(postgre_error($conn));
                         echo "<script type='text/javascript'>alert('Update Product Successful');</script>";
                         echo "<script> location.href='admin_product.php'; </script>";
                         exit;
@@ -125,8 +125,8 @@
 	if (isset($_GET["id"])) {
 		$id = $_GET["id"];
 		$sqlsring = "select * from product where ProductID='$id'";
-		$result = mysqli_query($conn, $sqlsring);
-		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		$result = postgre_query($conn, $sqlsring);
+		$row = postgre_fetch_array($result, POSTGRE_ASSOC);
 		$proname = $row["ProductName"];
         $proid = $row["ProductID"];
 		$price = $row['Price'];

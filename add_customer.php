@@ -71,11 +71,11 @@ if(isset($_POST["btn_add"]))
     $pass=md5($pass1);
     include_once("connection.php");
     $sq="select * from customer where Username='$us' or Email='$email'";
-    $res=mysqli_query($conn,$sq);
-    if(mysqli_num_rows($res)==0){
-        mysqli_query($conn,"Insert into customer (Username, Password,CustomerName,Tel,Email,Address,State) 
+    $res=postgre_query($conn,$sq);
+    if(postgre_num_rows($res)==0){
+      postgre_query($conn,"Insert into customer (Username, Password,CustomerName,Tel,Email,Address,State) 
         values('$us','$pass','$fname',$phone,'$email','$address',$state)")
-        or die(mysqli_error($conn));
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('Add Successful');</script>";
         echo "<script> location.href='add_customer.html'; </script>";
         exit;

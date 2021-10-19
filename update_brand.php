@@ -33,8 +33,8 @@
 	include_once('connection.php');
         if(isset($_GET["id"])){
 			$id=$_GET["id"];
-			$result=mysqli_query($conn,"select*from brand where BrandID='$id'") or die(mysqli_error($conn)) ;
-			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$result=postgre_query($conn,"select*from brand where BrandID='$id'") or die(postgre_error($conn)) ;
+			$row=postgre_fetch_array($result,POSTGRE_ASSOC);
 			$brandid=$row['BrandID'];
 			$brandname=$row['BrandName'];
 ?>
@@ -52,10 +52,10 @@ if(isset($_POST["btn_update"]))
     else{
     include_once("connection.php");
     $sq="select * from brand where BrandName='$brandname' and BrandID!='$brandid'";
-    $res=mysqli_query($conn,$sq);
-    if(mysqli_num_rows($res)==0){
-        mysqli_query($conn,"UPDATE `brand` SET `BrandName`='$brandname' WHERE BrandID='$brandid'")
-        or die(mysqli_error($conn));
+    $res=postgre_query($conn,$sq);
+    if(postgre_num_rows($res)==0){
+      postgre_query($conn,"UPDATE `brand` SET `BrandName`='$brandname' WHERE BrandID='$brandid'")
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('Update Brand Successful');</script>";
         echo "<script> location.href='admin_brand.php'; </script>";
         exit;

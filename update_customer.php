@@ -52,8 +52,8 @@
 	include_once('connection.php');
         if(isset($_GET["id"])){
 			$id=$_GET["id"];
-			$result=mysqli_query($conn,"select*from customer where CustomerID='$id'") or die(mysqli_error($conn)) ;
-			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$result=postgre_query($conn,"select*from customer where CustomerID='$id'") or die(postgre_error($conn)) ;
+			$row=postgre_fetch_array($result,POSTGRE_ASSOC);
 			$cusid=$row['CustomerID'];
 			$cusname=$row['CustomerName'];
 			$username=$row['UserName'];
@@ -95,12 +95,12 @@ if(isset($_POST["btn_update"]))
     else{
     include_once("connection.php");
     $sq="select * from customer where CustomerID!='$cusid' and Email='$email'";
-    $res=mysqli_query($conn,$sq);
-    if(mysqli_num_rows($res)==0){
-        mysqli_query($conn,"UPDATE `customer` SET 
+    $res=postgre_query($conn,$sq);
+    if(postgre_num_rows($res)==0){
+      postgre_query($conn,"UPDATE `customer` SET 
         `UserName`='$us',
         `CustomerName`='$fname',`Tel`='$tel',`Email`='$email',`Address`='$address',`State`='$state' WHERE CustomerID='$cusid'")
-        or die(mysqli_error($conn));
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('Update Customer Successful');</script>";
         echo "<script> location.href='admin_customer.php'; </script>";
         exit;

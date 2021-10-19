@@ -46,12 +46,12 @@
                 if(isset($_GET["id"])){
                     $id=$_GET["id"];
                     $sq="select Img from product where ProductID='$id'";
-                    $res=mysqli_query($conn,$sq);
-                    $row=mysqli_fetch_array($res,MYSQLI_ASSOC);
+                    $res=postgre_query($conn,$sq);
+                    $row=postgre_fetch_array($res,POSTGRE_ASSOC);
                     $filePic=$row['Img'];
                     unlink("product-imgs/".$filePic);
-                    mysqli_query($conn,"delete from orderdetail where ProductID='$id'");
-                    mysqli_query($conn,"delete from product where ProductID='$id'");
+                    postgre_query($conn,"delete from orderdetail where ProductID='$id'");
+                    postgre_query($conn,"delete from product where ProductID='$id'");
                 }
             }
             ?>
@@ -139,8 +139,8 @@
           <tbody>
           <?php
 			$No=1;
-            $result=mysqli_query($conn,"Select ProductID, Img, ProductName, Price from product");
-            while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){	
+            $result=postgre_query($conn,"Select ProductID, Img, ProductName, Price from product");
+            while($row=postgre_fetch_array($result,POSTGRE_ASSOC)){	
 			?>
             <tr>
               <td><?php echo $row["ProductID"];  ?></td>

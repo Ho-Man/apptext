@@ -36,10 +36,10 @@
     function bind_Category_List($conn)
     {
         $sqlstring = "select * from brand";
-        $result = mysqli_query($conn, $sqlstring);
+        $result = postgre_query($conn, $sqlstring);
         echo "<select name='BrandList' class='form-control'>
 		<option value='0'>Choose category</option>";
-        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        while ($row = postgre_fetch_array($result, POSTGRE_ASSOC)) {
             echo "<option value='" . $row['BrandID'] . "'>" . $row['BrandName'] . "</option>";
         }
         echo "</select>";
@@ -76,13 +76,13 @@
             if ($pic['type'] == "image/jpg" || $pic['type'] == "image/jpeg" || $pic['type'] == "image/png" || $pic['type'] == "image/gif") {
                 if ($pic['size'] < 614400) {
                     $sq = "select * from product where ProductID='$proid' or ProductName='$proname'";
-                    $result = mysqli_query($conn, $sq);
-                    if (mysqli_num_rows($result) == 0) {
+                    $result = postgre_query($conn, $sq);
+                    if (postgre_num_rows($result) == 0) {
                         copy($pic['tmp_name'], "product-imgs/" . $pic['name']);
                         $filePic = $pic['name'];
                         $sqlstring = "Insert into product(
                             `ProductID`, `ProductName`, `Price`, `Img`, `Stock`, `Description`, `BrandID`) values ('$proid','$proname',$price,'$filePic',$stock,'$description','$brand')";
-                        mysqli_query($conn, $sqlstring) or die(mysqli_error($conn));
+                            postgre_query($conn, $sqlstring) or die(postgre_error($conn));
                         echo "<script type='text/javascript'>alert('Add product Successful');</script>";
                         echo '<meta http-equiv="refresh" content="0;URL=admin_product.php"/>';
                     } else {

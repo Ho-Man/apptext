@@ -3,7 +3,7 @@ include_once("connection.php");
 if(isset($_POST["btn_signin"]))
 {
     $us=$_POST["username"];
-    $us=htmlspecialchars(mysqli_real_escape_string($conn,$us));
+    $us=htmlspecialchars(postgre_real_escape_string($conn,$us));
     $pass1=$_POST["pass1"];
     $pass2=$_POST["pass2"];
     $fname=$_POST["fullname"];
@@ -22,11 +22,11 @@ if(isset($_POST["btn_signin"]))
     }
     $pass=md5($pass1);
     $sq="select * from customer where Username='$us' or Email='$email'";
-    $res=mysqli_query($conn,$sq);
-    if(mysqli_num_rows($res)==0){
-        mysqli_query($conn,"Insert into customer (UserName, Password, CustomerName,Tel,Email,Address,State) 
+    $res=postgre_query($conn,$sq);
+    if(postgre_num_rows($res)==0){
+        postgre_query($conn,"Insert into customer (UserName, Password, CustomerName,Tel,Email,Address,State) 
         values('$us','$pass','$fname',$phone,'$email','$address',0)")
-        or die(mysqli_error($conn));
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('You have registered successfully');</script>";
         echo "<script> location.href='index.php'; </script>";
         exit;

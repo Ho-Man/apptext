@@ -50,10 +50,10 @@ if(isset($_POST["btn_add"]))
 }
     else{
     $sq="select * from `orderdetail` where OrderID=$orderid and ProductID='$proid'";
-    $res=mysqli_query($conn,$sq) or die(mysqli_error($conn));
-    if(mysqli_num_rows($res)==0){
-        mysqli_query($conn,"INSERT INTO `orderdetail`(`OrderID`, `ProductID`, `Quality`) VALUES ('$orderid','$proid','$quality')")
-        or die(mysqli_error($conn));
+    $res=postgre_query($conn,$sq) or die(postgre_error($conn));
+    if(postgre_num_rows($res)==0){
+      postgre_query($conn,"INSERT INTO `orderdetail`(`OrderID`, `ProductID`, `Quality`) VALUES ('$orderid','$proid','$quality')")
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('Add OrderDetail Successful');</script>";
         echo "<script> location.href='admin_orderdetail.php'; </script>";
         exit;

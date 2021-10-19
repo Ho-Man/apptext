@@ -188,8 +188,8 @@
           <?php
             include_once("connection.php");
 			      $No=1;
-            $result=mysqli_query($conn,"select ProductID, DATEDIFF(DateAdd,CURRENT_DATE) as day from product order by day desc LIMIT 10") or die(mysqli_error($conn));
-            while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){	
+            $result=postgre_query($conn,"select ProductID, DATEDIFF(DateAdd,CURRENT_DATE) as day from product order by day desc LIMIT 10") or die(postgre_error($conn));
+            while($row=postgre_fetch_array($result,POSTGRE_ASSOC)){	
 			?>
             <tr>
               <td><?php echo $row["ProductID"];  ?></td>

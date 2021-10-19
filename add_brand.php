@@ -43,10 +43,10 @@ if(isset($_POST["btn_add"]))
     }
     else{
     $sq="select * from brand where BrandName='$brandname' or BrandID='$brandid'";
-    $res=mysqli_query($conn,$sq);
-    if(mysqli_num_rows($res)==0){
-        mysqli_query($conn,"INSERT INTO `brand`(`BrandID`, `BrandName`) VALUES ('$brandid','$brandname')")
-        or die(mysqli_error($conn));
+    $res=postgre_query($conn,$sq);
+    if(postgre_num_rows($res)==0){
+      postgre_query($conn,"INSERT INTO `brand`(`BrandID`, `BrandName`) VALUES ('$brandid','$brandname')")
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('Add Brand Successful');</script>";
         echo "<script> location.href='admin_brand.php'; </script>";
         exit;

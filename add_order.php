@@ -43,10 +43,10 @@ if(isset($_POST["btn_add"]))
     }
     else{
     $sq="select * from `order` where OrderID=$orderid";
-    $res=mysqli_query($conn,$sq) or die(mysqli_error($conn));
-    if(mysqli_num_rows($res)==0){
-        mysqli_query($conn,"INSERT INTO `order`(`OrderID`, `CustomerID`) VALUES ($orderid,$cusid)")
-        or die(mysqli_error($conn));
+    $res=postgre_query($conn,$sq) or die(postgre_error($conn));
+    if(postgre_num_rows($res)==0){
+      postgre_query($conn,"INSERT INTO `order`(`OrderID`, `CustomerID`) VALUES ($orderid,$cusid)")
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('Add Order Successful');</script>";
         echo "<script> location.href='admin_order.php'; </script>";
         exit;

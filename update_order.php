@@ -33,8 +33,8 @@
 	include_once('connection.php');
         if(isset($_GET["id"])){
 			$id=$_GET["id"];
-			$result=mysqli_query($conn,"select*from `order` where OrderID='$id'") or die(mysqli_error($conn)) ;
-			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$result=postgre_query($conn,"select*from `order` where OrderID='$id'") or die(postgre_error($conn)) ;
+			$row=postgre_fetch_array($result,POSTGRE_ASSOC);
 			$orderid=$row['OrderID'];
 			$cusid=$row['CustomerID'];
       $orderdate=$row['OrderDate'];
@@ -54,10 +54,10 @@ if(isset($_POST["btn_update"]))
     }
     else{
     $sq="select * from `order` where OrderID=$orderid";
-    $res=mysqli_query($conn,$sq) or die(mysqli_error($conn));
-    if(mysqli_num_rows($res)==1){
-        mysqli_query($conn,"UPDATE `order` SET `CustomerID`='$cusid' WHERE OrderID=$orderid")
-        or die(mysqli_error($conn));
+    $res=postgre_query($conn,$sq) or die(postgre_error($conn));
+    if(postgre_num_rows($res)==1){
+      postgre_query($conn,"UPDATE `order` SET `CustomerID`='$cusid' WHERE OrderID=$orderid")
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('Update Order Successful');</script>";
     }
     else{

@@ -28,8 +28,8 @@
         if(isset($_GET["function"])=='del'){
             if(isset($_GET["id"])){
                 $id=$_GET["id"];
-                mysqli_query($conn,"delete from product where BrandID='$id'");
-                mysqli_query($conn,"delete from brand where BrandID='$id'");
+                postgre_query($conn,"delete from product where BrandID='$id'");
+                postgre_query($conn,"delete from brand where BrandID='$id'");
             }
         }
         ?>
@@ -131,8 +131,8 @@
           <tbody>
             <?php
             $No=1;
-            $result=mysqli_query($conn,"Select * from brand");
-            while($row=mysqli_fetch_array($result,MYSQLI_ASSOC))
+            $result=postgre_query($conn,"Select * from brand");
+            while($row=postgrefetch_array($result,POSTGRE_ASSOC))
             {
             ?>
             <tr>

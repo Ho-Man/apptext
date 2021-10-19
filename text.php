@@ -29,13 +29,13 @@
             if ($pic['type'] == "image/jpg" || $pic['type'] == "image/jpeg" || $pic['type'] == "image/png" || $pic['type'] == "image/gif") {
                 if ($pic['size'] < 614400) {
                     $sq = "select * from product where ProductID='$proid' or ProductName='$proname'";
-                    $result = mysqli_query($conn, $sq);
-                    if (mysqli_num_rows($result) == 0) {
+                    $result = postgre_query($conn, $sq);
+                    if (postgre_i_num_rows($result) == 0) {
                         copy($pic['tmp_name'], "product-imgs/" . $pic['name']);
                         $filePic = $pic['name'];
                         $sqlstring = "Insert into product(
                             `ProductID`, `ProductName`, `Price`, `Img`, `Stock`, `Description`, `BrandID`) values ('$proid','$proname',$price,'$filePic',$stock,'$description','$brand')";
-                        mysqli_query($conn, $sqlstring) or die(mysqli_error($conn));
+                            postgre_query($conn, $sqlstring) or die(postgre_error($conn));
                         echo "<script type='text/javascript'>alert('Add Successful');</script>";
                         echo '<meta http-equiv="refresh" content="0;URL=#"/>';
                     } else {
@@ -94,11 +94,11 @@ if(isset($_POST["btn_add"]))
     $pass=md5($pass1);
     include_once("connection.php");
     $sq="select * from customer where Username='$us' or Email='$email'";
-    $res=mysqli_query($conn,$sq);
-    if(mysqli_num_rows($res)==0){
-        mysqli_query($conn,"Insert into customer (Username, Password,CustomerName,Tel,Email,Address,State) 
+    $res=postgre_query($conn,$sq);
+    if(postgre_num_rows($res)==0){
+        postgre_query($conn,"Insert into customer (Username, Password,CustomerName,Tel,Email,Address,State) 
         values('$us','$pass','$fname',$phone,'$email','$address',$state)")
-        or die(mysqli_error($conn));
+        or die(postgre_error($conn));
         echo "<script type='text/javascript'>alert('Add Successful');</script>";
         echo "<script> location.href='add_customer.html'; </script>";
         exit;
